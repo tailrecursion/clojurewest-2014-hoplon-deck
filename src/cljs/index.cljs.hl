@@ -1,0 +1,24 @@
+(page "index.html"
+  (:require [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]
+            [tailrecursion.hoplon.reload :as r]))
+
+(if (-> js/window .-location .-hostname (= "localhost"))
+  (r/reload-all))
+
+(defn spreadsheets-are-awesome []
+  (chapter :title "Spreadsheets are Awesome"))
+
+(defn web-development-not-awesome []
+  (chapter :title "Web Development: Not Awesome?"))
+
+(defn hoplon-as-spreadsheet []
+  (chapter :title "Why Hoplon is Spreadsheety"))
+
+(html
+  (head)
+  (body
+    (slideshow :theme "sky"
+      (chapter :title "Hoplon!!")
+      (spreadsheets-are-awesome)
+      (web-development-not-awesome)
+      (hoplon-as-spreadsheet))))
