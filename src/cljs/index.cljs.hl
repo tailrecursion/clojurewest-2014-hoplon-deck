@@ -7,6 +7,7 @@
 
 (defelem mono [_ xs]
   (span :style "font-family: monospace;" xs))
+
 (defn spreadsheets-are-awesome []
   (chapter :title "Spreadsheets"
     (slide
@@ -18,34 +19,45 @@
     (slide :title "Spreadsheets are Undead!"
       (quicklist
        (em "\"Unfortunately we're still using 40 year old technology\"")
-       "Maligned in most programmer circles"
+       "Disparaged in most programmer circles"
        "Just like Lisp."))
     (slide :title "Spreadsheet Programming"
       (quicklist
        "Intuitive"
        "Reactive"
        "Transparent"
-       "Modular"))
+       "Layered"))
     (slide :title "Intuitive"
       (img :src "img/tables.png"))
     (slide :title "Reactive"
+      (div
+        (p (em "\"You can have a variety of semantics for managing time... for managing the succession of values (represented by an identity)\""))
+        (p (em "- Rich Hickey")))
+      (hr)
       (quicklist
-       (em "\"You can have a variety of semantics for managing time... for managing the succession of values (represented by an identity)\" - Rich Hickey")
        (span (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))
        (span (mono "cell") " - another \"unit of time management\"")
        "Time doesn't exist in spreadsheets."))
     (slide :title "Transparent"
-      (img :width "100%" :src "img/Spreadsheet_animation.gif"))
-    (slide :title "Modular"
-      (img :src "img/Excel2.gif"))
-    (slide :title "Modular"
-      (img :src "img/excel_wizard_one.gif"))
+      (img :width "100%" :src "img/Spreadsheet_animation.gif")
+      (hr)
+      (p "Data, functions, and their relationships are highly accessible."))
+    (slide :title "Layered"
+      (img :src "img/Excel2.gif")
+      (hr)
+      (p "Data and view are separate."))
+    (slide :title "Layered"
+      (img :src "img/excel_wizard_one.gif")
+      (hr)
+      (p "View can be modified without changing data."))
     (slide :title "Spreadsheets Divide Labor"
       (quicklist
        "Clerk enters data"
        "Domain expert writes formulas"
        "Interested parties make visualizations, reports"
-       "Modularity enables this division"))))
+       "Layers enable this division"))
+    (slide
+      (img :src "ring.png"))))
 
 (defn web-development-not-awesome []
   (chapter :title "Web Development: Not Awesome?"))
