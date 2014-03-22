@@ -5,8 +5,50 @@
 (if (-> js/window .-location .-hostname (= "localhost"))
   (r/reload-all))
 
+(defelem mono [_ xs]
+  (span :style "font-family: monospace;" xs))
 (defn spreadsheets-are-awesome []
-  (chapter :title "Spreadsheets are Awesome"))
+  (chapter :title "Spreadsheets"
+    (slide
+      (img :src "img/Visicalc.png")
+      (p (em "VisiCalc (1979)")))
+    (slide
+      (img :src "img/Excel1.png")
+      (p (em "Excel (2014)")))
+    (slide :title "Spreadsheets are Undead!"
+      (quicklist
+       (em "\"Unfortunately we're still using 40 year old technology\"")
+       "Maligned in most programmer circles"
+       "Just like Lisp."))
+    (slide :title "Spreadsheet Programming"
+      (quicklist
+       "Intuitive"
+       "Reactive"
+       "Transparent"
+       "Modular"))
+    (slide :title "Intuitive"
+      (img :src "img/tables.png"))
+    (slide :title "Reactive"
+      (quicklist
+       (em "\"You can have a variety of semantics for managing time... for managing the succession of values (represented by an identity)\" - Rich Hickey")
+       (span (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))
+       (span (mono "cell") " - another \"unit of time management\"")
+       "Time doesn't exist in spreadsheets."))
+    (slide :title "Transparent"
+      (img :width "100%" :src "img/Spreadsheet_animation.gif"))
+    (slide :title "Modular"
+      (img :src "img/Excel2.gif"))
+    (slide :title "Modular"
+      (img :src "img/Excel3.png"))
+    (slide :title "Spreadsheet Modularity"
+      (quicklist
+       "Clerk enters data"
+       "Domain expert programs formulas"
+       "Interested parties make reports, charts"))
+    (slide :title "Spreadsheet Reuse"
+      (quicklist
+       "Data with different formulas"
+       "Formulas with different visualizations"))))
 
 (defn web-development-not-awesome []
   (chapter :title "Web Development: Not Awesome?"))
@@ -17,8 +59,10 @@
 (html
   (head)
   (body
-    (slideshow :theme "sky"
-      (chapter :title "Hoplon!!")
+    (slideshow :theme "simple"
+      (chapter :title "Hoplon"
+        (hr)
+        (h3 "Programming with the Undead"))
       (spreadsheets-are-awesome)
       (web-development-not-awesome)
       (hoplon-as-spreadsheet))))
