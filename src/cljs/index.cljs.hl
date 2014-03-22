@@ -39,16 +39,13 @@
     (slide :title "Modular"
       (img :src "img/Excel2.gif"))
     (slide :title "Modular"
-      (img :src "img/Excel3.png"))
-    (slide :title "Spreadsheet Modularity"
+      (img :src "img/excel_wizard_one.gif"))
+    (slide :title "Spreadsheets Divide Labor"
       (quicklist
        "Clerk enters data"
-       "Domain expert programs formulas"
-       "Interested parties make reports, charts"))
-    (slide :title "Spreadsheet Reuse"
-      (quicklist
-       "Data with different formulas"
-       "Formulas with different visualizations"))))
+       "Domain expert writes formulas"
+       "Interested parties make visualizations, reports"
+       "Modularity enables this division"))))
 
 (defn web-development-not-awesome []
   (chapter :title "Web Development: Not Awesome?"))
