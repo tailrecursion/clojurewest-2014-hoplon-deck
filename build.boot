@@ -20,7 +20,7 @@
 (deftask present
   "Continuously recompile and serve slides locally."
   []
-  (println "Serving slides at http://localhost:8000/triclojure-deck.html")
+  (println "Serving slides at http://localhost:8000/")
   (comp (watch)
         (hoplon {:prerender false})
         (dev-server)))

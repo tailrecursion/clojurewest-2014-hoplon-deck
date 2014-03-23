@@ -56,12 +56,17 @@
        "Others make visualizations, reports, applications"))
     (slide :title "Spreadsheets are Awesome"
       (quicklist
-       "Powerful, practical environment geared toward application delivery"
-       "Highly accessible principles and metaphors"
-       "Layers amene themselves to efficient division of labor"))))
+       "Highly accessible principles, metaphors"
+       "Powerful, practical environment"
+       "Layers efficiently divide labor"))))
 
-(defn web-development-not-awesome []
-  (chapter :title "Web Development: Not Awesome?"))
+(defn status-quo []
+  (chapter :title "Status quo"
+    (slide :title "Web is the Platform"
+      (quicklist
+       "HTML, CSS, JavaScript, SVG"
+       "New APIs, standards emerge regularly"
+       "Desktop, tablet, mobile"))))
 
 (defn hoplon-as-spreadsheet []
   (chapter :title "Why Hoplon is Spreadsheety"))
@@ -93,5 +98,5 @@
            (em "We can't reliably repeat successes")
            (em (strong "We are losing.")))))
       (spreadsheets-are-awesome)
-      (web-development-not-awesome)
+      (status-quo)
       (hoplon-as-spreadsheet))))
