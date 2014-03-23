@@ -18,46 +18,47 @@
       (p (em "Excel (2014)")))
     (slide :title "Spreadsheets are Undead!"
       (quicklist
-       (em "\"Unfortunately we're still using 40 year old technology\"")
+       (span "OH: " (em "\"Unfortunately we're still using 40 year old technology\""))
        "Disparaged in most programmer circles"
-       "Just like Lisp."))
+       "Just. Like. Lisp."))
     (slide :title "Spreadsheet Programming"
       (quicklist
-       "Intuitive"
        "Reactive"
        "Transparent"
        "Layered"))
-    (slide :title "Intuitive"
-      (img :src "img/tables.png"))
+    (slide
+      (p (img :src "img/rich_hickey.png"))
+      (p (em "\"You can have a variety of semantics for managing time... for managing the succession of values [represented by an identity]\""))
+      (p "Rich Hickey"))
     (slide :title "Reactive"
-      (div
-        (p (em "\"You can have a variety of semantics for managing time... for managing the succession of values (represented by an identity)\""))
-        (p (em "- Rich Hickey")))
+      (quicklist
+       (span (mono "cell") " - another \"unit of time management\"")
+       "Time doesn't exist in spreadsheets."
+       (span "Similar to " (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))))
+    (slide :title "Transparent"
+      (img :src "img/Spreadsheet_animation.gif")
       (hr)
       (quicklist
-       (span (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))
-       (span (mono "cell") " - another \"unit of time management\"")
-       "Time doesn't exist in spreadsheets."))
-    (slide :title "Transparent"
-      (img :width "100%" :src "img/Spreadsheet_animation.gif")
-      (hr)
-      (p "Data, functions, and their relationships are highly accessible."))
+       "Data, formulas, and their relationships are highly accessible."
+       "The entire interface is a giant debugger."))
     (slide :title "Layered"
       (img :src "img/Excel2.gif")
       (hr)
-      (p "Data and view are separate."))
-    (slide :title "Layered"
+      (p "Data, formula, and chart are separate layers"))
+    (slide
       (img :src "img/excel_wizard_one.gif")
       (hr)
-      (p "View can be modified without changing data."))
+      (p "Charts can be added and customized without modifying the underlying data or formulas."))
     (slide :title "Spreadsheets Divide Labor"
       (quicklist
-       "Clerk enters data"
-       "Domain expert writes formulas"
-       "Interested parties make visualizations, reports"
-       "Layers enable this division"))
-    (slide
-      (img :src "ring.png"))))
+       "Clerks enter data"
+       "Domain experts write formulas"
+       "Others make visualizations, reports, applications"))
+    (slide :title "Spreadsheets are Awesome"
+      (quicklist
+       "Powerful, practical environment geared toward application delivery"
+       "Highly accessible principles and metaphors"
+       "Layers amene themselves to efficient division of labor"))))
 
 (defn web-development-not-awesome []
   (chapter :title "Web Development: Not Awesome?"))
@@ -69,9 +70,28 @@
   (head)
   (body
     (slideshow :theme "simple"
-      (chapter :title "Hoplon"
-        (hr)
-        (h3 "Programming with the Undead"))
+      (chapter
+        (slide :title "Hoplon"
+          (hr)
+          (h3 "Application Programming with Undead Technology"))
+        (slide :title "Applications"
+          (quicklist
+           "domain"
+           "problem"
+           "computing environment"
+           "effort (programming)"))
+        (slide :title "Application Programming"
+          (quicklist
+           "Present data to the user in a useful way"
+           "Design user interactions over the data"
+           "Interpret interactions and integrate with state"))
+        (slide :title "The Average Application"
+          (quicklist
+           "Not much different from something that exists"
+           "Doesn't require deep technical research, innovation"
+           (em "We can't reliably estimate")
+           (em "We can't reliably repeat successes")
+           (em (strong "We are losing.")))))
       (spreadsheets-are-awesome)
       (web-development-not-awesome)
       (hoplon-as-spreadsheet))))
