@@ -74,16 +74,18 @@
                   :callback (fn [] (.initHighlightingOnLoad js/hljs))}
                  {:src "reveal.js/plugin/notes/notes.js"
                   :async true}]}))))
-
-  (div (-> attrs (dissoc :theme) (merge {:class "reveal"}))
-       (link :rel "stylesheet"
-             :href "reveal.js/css/reveal.css")
-       (link :rel "stylesheet"
-             :href (str "reveal.js/css/theme/" theme ".css")
-             :id "theme")
-       (link :rel "stylesheet"
-             :href "reveal.js/plugin/highlight/github.min.css")
-       (div :class "slides" children)))
+  (html
+    (head)
+    (body
+      (div (-> attrs (dissoc :theme) (merge {:class "reveal"}))
+        (link :rel "stylesheet"
+          :href "reveal.js/css/reveal.css")
+        (link :rel "stylesheet"
+          :href (str "reveal.js/css/theme/" theme ".css")
+          :id "theme")
+        (link :rel "stylesheet"
+          :href "reveal.js/plugin/highlight/github.min.css")
+        (div :class "slides" children)))))
 
 (def bullet div)
 

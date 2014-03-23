@@ -1,103 +1,115 @@
 (page "index.html"
-  (:require [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]
-            [tailrecursion.hoplon.reload :as r]))
+  (:require
+   [tailrecursion.hoplon.reload :as r]
+   [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]))
 
-(if (-> js/window .-location .-hostname (= "localhost"))
-  (r/reload-all))
+(defelem mono [_ xs] (span :style "font-family: monospace;" xs))
+(when (-> js/window .-location .-hostname (= "localhost")) (r/reload-all))
 
-(defelem mono [_ xs]
-  (span :style "font-family: monospace;" xs))
+(slideshow :theme "simple"
 
-(defn spreadsheets-are-awesome []
-  (chapter :title "Spreadsheets"
+  (chapter ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    (slide :title "Hoplon"
+      (hr)
+      (h4 "Application Programming with Undead Technology"))
+
+    (slide :title "Applications"
+      (quicklist
+        "domain"
+        "problem"
+        "computing environment"
+        "effort (programming)"))
+
+    (slide :title "Application Programming"
+      (quicklist
+        "Present data to the user in a useful way"
+        "Design user interactions over the data"
+        "Interpret interactions and integrate with state"))
+
+    (slide :title "The Average Application"
+      (quicklist
+        "Not much different from something that exists"
+        "Doesn't require deep technical research, innovation"
+        (em "We can't reliably estimate")
+        (em "We can't reliably repeat successes")
+        (em (strong "We are losing.")))))
+
+  (chapter :title "Spreadsheets" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
     (slide
       (img :src "img/Visicalc.png")
       (p (em "VisiCalc (1979)")))
+
     (slide
       (img :src "img/Excel1.png")
       (p (em "Excel (2014)")))
+
     (slide :title "Spreadsheets are Undead!"
       (quicklist
        (span "OH: " (em "\"Unfortunately we're still using 40 year old technology\""))
        "Disparaged in most programmer circles"
        "Just. Like. Lisp."))
+
     (slide :title "Spreadsheet Programming"
       (quicklist
        "Reactive"
        "Transparent"
        "Layered"))
+
     (slide
       (p (img :src "img/rich_hickey.png"))
-      (p (em "\"You can have a variety of semantics for managing time... for managing the succession of values [represented by an identity]\""))
+      (p (em "\"You can have a variety of semantics for managing time... 
+              for managing the succession of values [represented by an identity]\""))
       (p "Rich Hickey"))
+
     (slide :title "Reactive"
       (quicklist
        (span (mono "cell") " - another \"unit of time management\"")
        "Time doesn't exist in spreadsheets."
        (span "Similar to " (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))))
+
     (slide :title "Transparent"
       (img :src "img/Spreadsheet_animation.gif")
       (hr)
       (quicklist
        "Data, formulas, and their relationships are highly accessible."
        "The entire interface is a giant debugger."))
+
     (slide :title "Layered"
       (img :src "img/Excel2.gif")
       (hr)
       (p "Data, formula, and chart are separate layers"))
+
     (slide
       (img :src "img/excel_wizard_one.gif")
       (hr)
       (p "Charts can be added and customized without modifying the underlying data or formulas."))
+
     (slide :title "Spreadsheets Divide Labor"
       (quicklist
        "Clerks enter data"
        "Domain experts write formulas"
        "Others make visualizations, reports, applications"))
+
     (slide :title "Spreadsheets are Awesome"
       (quicklist
        "Highly accessible principles, metaphors"
        "Powerful, practical environment"
-       "Layers efficiently divide labor"))))
+       "Layers efficiently divide labor")))
 
-(defn hoplon-as-spreadsheet []
-  (chapter :title "Hoplon"
+  (chapter :title "Hoplon" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
     (slide :title "Hoplon = Spreadsheet + Lisp"
       (quicklist
        "Layered approach to web applications"
        "Supports the layered approach"
        "Built with Clojure, ClojureScript"))
-    (slide :title "Hoplon "
+
+    (slide :title "Hoplon"
       (quicklist
        "HTML5, SVG, D3 et al are the new \"charts\""
        "UI/UX designers are the new chart makers"
-       "Domain models should empower, support them"))))
-
-(html
-  (head)
-  (body
-    (slideshow :theme "simple"
-      (chapter
-        (slide :title "Hoplon"
-          (hr)
-          (h3 "Application Programming with Undead Technology"))
-        (slide :title "Applications"
-          (quicklist
-           "domain"
-           "problem"
-           "computing environment"
-           "effort (programming)"))
-        (slide :title "Application Programming"
-          (quicklist
-           "Present data to the user in a useful way"
-           "Design user interactions over the data"
-           "Interpret interactions and integrate with state"))
-        (slide :title "The Average Application"
-          (quicklist
-           "Not much different from something that exists"
-           "Doesn't require deep technical research, innovation"
-           (em "We can't reliably estimate")
-           (em "We can't reliably repeat successes")
-           (em (strong "We are losing.")))))
-      (spreadsheets-are-awesome)
-      (hoplon-as-spreadsheet))))
+       "Domain models should empower, support them"))
+    
+    ))
