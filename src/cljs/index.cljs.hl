@@ -60,16 +60,18 @@
        "Powerful, practical environment"
        "Layers efficiently divide labor"))))
 
-(defn status-quo []
-  (chapter :title "Status quo"
-    (slide :title "Web is the Platform"
-      (quicklist
-       "HTML, CSS, JavaScript, SVG"
-       "New APIs, standards emerge regularly"
-       "Desktop, tablet, mobile"))))
-
 (defn hoplon-as-spreadsheet []
-  (chapter :title "Why Hoplon is Spreadsheety"))
+  (chapter :title "Hoplon"
+    (slide :title "Hoplon = Spreadsheet + Lisp"
+      (quicklist
+       "Layered approach to web applications"
+       "Supports the layered approach"
+       "Built with Clojure, ClojureScript"))
+    (slide :title "Hoplon "
+      (quicklist
+       "HTML5, SVG, D3 et al are the new \"charts\""
+       "UI/UX designers are the new chart makers"
+       "Domain models should empower, support them"))))
 
 (html
   (head)
@@ -98,5 +100,4 @@
            (em "We can't reliably repeat successes")
            (em (strong "We are losing.")))))
       (spreadsheets-are-awesome)
-      (status-quo)
       (hoplon-as-spreadsheet))))
