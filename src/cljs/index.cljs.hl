@@ -8,10 +8,9 @@
 
 (slideshow :theme "simple"
 
-  (chapter
-    (slide :title "Hoplon"
-      (hr)
-      (h4 "Application Programming with Undead Technology"))
+  (chapter :title [(h1 "Hoplon")
+                   (hr)
+                   (h4 "Application Programming with Undead Technology")]
 
     (slide :title "Why raise the dead?"
       (quicklist "Platforms ever more complicated, diverse"
@@ -152,26 +151,6 @@
 
   (chapter :title "HLisp" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
-    (slide :title "The Hoplon Compiler"
-      (quicklist
-        (span "Hoplon compiles " (code "*.hl") " source files")
-        (span "Emits HTML files and " (code "main.js"))
-        "ClojureScript builds DOM at runtime"
-        "Frontend completely static HTML and JS"))
-    
-    (slide :title "Example Page"
-      (highlight
-        ;;{{
-        (page "index.html")
-        
-        (html
-          (head
-            (title "hello | home"))
-          (body
-            (h1 "Hello, world!")))
-        ;;}}
-        ))
-    
     (slide :title "HTML is Already a Program"
       (quicklist
         "Browser parses HTML markup"
@@ -198,6 +177,26 @@
         (div
           (h1 "Hello World")
           (p "Lisp rules!"))
+        ;;}}
+        ))
+    
+    (slide :title "The Hoplon Compiler"
+      (quicklist
+        (span "Hoplon compiles " (code "*.hl") " source files")
+        (span "Emits HTML files and " (code "main.js"))
+        "ClojureScript builds DOM at runtime"
+        "Frontend completely static HTML and JS"))
+    
+    (slide :title "Example Page"
+      (highlight
+        ;;{{
+        (page "index.html")
+        
+        (html
+          (head
+            (title "hello | home"))
+          (body
+            (h1 "Hello, world!")))
         ;;}}
         ))
     
