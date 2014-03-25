@@ -12,6 +12,13 @@
                    (hr)
                    (h4 "Web Application Programming with Undead Technology")]
 
+    (slide
+      (quicklist
+        (a :href "http://hoplon.io"
+          "http://hoplon.io")
+        (a :href "https://github.com/tailrecursion/hoplon-demos"
+          "https://github.com/tailrecursion/hoplon-demos")))
+
     (slide :title "Why raise the dead?"
       (quicklist "Platforms ever more complicated, diverse"
                  "We're bad at estimating"
