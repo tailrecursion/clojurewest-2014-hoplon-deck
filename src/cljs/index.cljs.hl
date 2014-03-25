@@ -436,6 +436,40 @@
             (rules/set-self! (:id self))
             (throw (Exception. "Username or password incorrect."))))
         ;;}}
+        ))
+    
+    (slide :title "Clientside"
+      (quicklist
+        (span "create " (code "state") ", " (code "error") ", and "
+              (code "loading") " cells")
+        "construct remote endpoints"
+        "call remotes like normal CLJS functions"))
+    
+    (slide :title (code "defremote")
+      (highlight :class "language-clojure"
+        ;;{{
+        (defc state   nil)
+        (defc error   nil)
+        (defc loading nil)
+        
+        (def next-state
+          (castra/mkremote 'my-application.api/query state error loading))
+
+        (def login!
+          (castra/mkremote 'my-application.api/login! state error loading))
+        
+        (with-init! (next-state nil))
+
+        (html
+          (head)
+          (body
+            (p :text (cell= (str (when-not (:id state) "not ") "logged in!")))
+
+            (form :submit #(login! (val-id "email") (val-id "password"))
+              (input :type "email" :id "email")
+              (input :type "password" :id "password")
+              (button :type "submit" "login"))))
+        ;;}}
         )))
   
   (chapter :title "Architecture" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
