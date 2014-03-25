@@ -9,9 +9,15 @@
 (slideshow :theme "simple"
 
   (chapter
-    :title [(h1 "Hoplon")
-            (hr)
-            (h4 "Application Programming with Undead Technology")])
+    (slide :title "Hoplon"
+      (hr)
+      (h4 "Application Programming with Undead Technology"))
+
+    (slide :title "Why raise the dead?"
+      (quicklist "Platforms ever more complicated, diverse"
+                 "We're bad at estimating"
+                 "We can't reliably repeat successes"
+                 (em "We're losing even the easiest battles"))))
 
   (chapter :title "Spreadsheets" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -103,21 +109,6 @@
        ;;}}
        ))
 
-    (slide :title "Input Cell in Action"
-      (highlight
-       ;;{{
-       (let [cnt (cell 0)]
-         (div
-           (p (text "cnt = ~{cnt}"))
-           (button :on-click #(swap! cnt inc) "Increment!")))
-       ;;}}
-       )
-      (let [cnt (cell 0)]
-        (div
-          (p (text "cnt = ~{cnt}"))
-          (button :on-click #(swap! cnt inc) :css {:font-size "larger"}
-            "Increment!"))))
-
     (slide :title "Formula Cells")
 
     (slide :title (code "cell=")
@@ -148,23 +139,16 @@
        ;;}}
        ))
 
-    (slide :title "Formula Cell in Action"
-      (highlight
-       ;;{{
-       (let [cnt   (cell 0)
-             cnt*5 (cell= (* cnt 5))]
-         (div
-           (p (text "cnt = ~{cnt}, cnt*5 = ~{cnt*5}"))
-           (button :class :on-click #(swap! cnt inc) "Increment!")
-           (button :on-click #(swap! cnt dec) "Decrement!")))
-       ;;}}
-       )
-      (let [cnt   (cell 0)
-            cnt*5 (cell= (* cnt 5))]
-        (div
-          (p (text "cnt = ~{cnt}, cnt*5 = ~{cnt*5}"))
-          (button :on-click #(swap! cnt inc) :css {:font-size "larger"} "Increment!")
-          (button :on-click #(swap! cnt dec) :css {:font-size "larger"} "Decrement!")))))
+    (slide :title "Javelin's Twists"
+      (quicklist
+       (span "Cells can contain"
+         (quicklist "Collections"
+                    "Functions"
+                    "Cells"))
+       (span "Naming/scopes follow ClojureScript"
+         (quicklist
+          (code "def")
+          (code "let"))))))
 
   (chapter :title "HLisp" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
