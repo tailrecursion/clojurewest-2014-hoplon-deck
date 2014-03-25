@@ -35,8 +35,8 @@
     (slide :title "Spreadsheets are Amazing"
       (quicklist
        "Disparaged by many progammers"
-       "Seen as an open problem instead of solution to learn from"
-       "Not computer-sciency enough"
+       "Seen as an open problem instead of something to learn from"
+       "Not \"computer-sciency\" enough"
        "What people use when we fail them"))
 
     (slide :title "Staying Power"
