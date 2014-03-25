@@ -172,7 +172,7 @@
           </div>
           ;;}}
           )
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (div
           (h1 "Hello World")
@@ -188,7 +188,7 @@
         "Frontend completely static HTML and JS"))
     
     (slide :title "Example Page"
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (page "index.html")
         
@@ -201,7 +201,7 @@
         ))
     
     (slide :title "Attributes"
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (div :id "main" :class "fancy"
           (h1 "Hello World"))
@@ -272,7 +272,7 @@
         ;;}}
         )
       (hr)
-      (em "Collects attribute and child arguments, implementing the HTML semantic."))
+      (em "Collects attributes and children, implements HTML semantic."))
     
     (slide :title "Page Declaration"
       (quicklist
@@ -303,7 +303,7 @@
         "Cells trigger updates to DOM element properties"))
 
     (slide
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (defc clicks 0)
 
@@ -324,7 +324,7 @@
       (em "Attributes dispatch on type of value."))
     
     (slide
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (defmethod do! :slide
           [element _ value]
@@ -344,7 +344,40 @@
         ;;}}
         )
       (hr)
-      (em "Attributes can be extended.")))
+      (em "Attributes can be extended."))
+    
+    (slide :title "When HTML is a Program..."
+      (highlight :class "language-clojure"
+        ;;{{
+        (def-values
+          [trigger1 content1 trigger2 content2]
+          (tabify a div a div))
+        
+        (div :class "tabs"
+
+          (ul :class "tab-triggers"
+            (li (trigger1 "tab 1"))
+            (li (trigger2 "tab 2")))
+
+          (div :class "tab-content"
+            (content1
+              (p "Content for tab 1."))
+            (content2
+              (p "Content for tab 2."))))
+        ;;}}
+        ))
+    
+    (slide :title "When HTML is a Program..."
+      (highlight :class "language-clojure"
+        ;;{{
+        (def red-div
+          (div :css {:background-color "red"}))
+        
+        (red-div
+          (p "My background is red!"))
+        ;;}}
+        ))
+    )
   
   (chapter :title "Castra" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
