@@ -10,7 +10,7 @@
 
   (chapter :title [(h1 "Hoplon")
                    (hr)
-                   (h4 "Application Programming with Undead Technology")]
+                   (h4 "Web Application Programming with Undead Technology")]
 
     (slide :title "Why raise the dead?"
       (quicklist "Platforms ever more complicated, diverse"
@@ -228,7 +228,7 @@
         ;;{{
         (def elem (div :id "div1"))
         
-        (div1 :class "fancy"
+        (elem :class "fancy"
           (p "I'm in a paragraph!"))
         
         ; <div id="div1" class="fancy">
