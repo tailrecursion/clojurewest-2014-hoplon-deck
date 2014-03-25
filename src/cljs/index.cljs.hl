@@ -21,9 +21,6 @@
   (chapter :title "Spreadsheets" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     (slide
-      (p "Spreadsheets are amazing."))
-
-    (slide
       (img :src "img/Visicalc.png")
       (p (em "VisiCalc (1979)")))
 
@@ -34,6 +31,13 @@
     (slide
       (p (img :src "img/stewart.jpg"))
       (p (em "Like Patrick Stewart, spreadsheets are undead.")))
+
+    (slide :title "Spreadsheets are Amazing"
+      (quicklist
+       "Disparaged by many progammers"
+       "Seen as an open problem instead of solution to learn from"
+       "Not computer-sciency enough"
+       "What people use when we fail them"))
 
     (slide :title "Staying Power"
       (quicklist
