@@ -8,34 +8,14 @@
 
 (slideshow :theme "simple"
 
-  (chapter ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    (slide :title "Hoplon"
-      (hr)
-      (h4 "Application Programming with Undead Technology"))
-
-    (slide :title "Applications"
-      (quicklist
-        "domain"
-        "problem"
-        "computing environment"
-        "effort (programming)"))
-
-    (slide :title "Application Programming"
-      (quicklist
-        "Present data to the user in a useful way"
-        "Design user interactions over the data"
-        "Interpret interactions and integrate with state"))
-
-    (slide :title "The Average Application"
-      (quicklist
-        "Not much different from something that exists"
-        "Doesn't require deep technical research, innovation"
-        (em "We can't reliably estimate")
-        (em "We can't reliably repeat successes")
-        (em (strong "We are losing.")))))
+  (slide :title "Hoplon"
+    (hr)
+    (h4 "Application Programming with Undead Technology"))
 
   (chapter :title "Spreadsheets" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    (slide
+      (p "Spreadsheets are amazing."))
 
     (slide
       (img :src "img/Visicalc.png")
@@ -45,13 +25,11 @@
       (img :src "img/Excel1.png")
       (p (em "Excel (2014)")))
 
-    (slide :title "Spreadsheets are Undead!"
-      (quicklist
-       (span "OH: " (em "\"Unfortunately we're still using 40 year old technology\""))
-       "Disparaged in most programmer circles"
-       "Just. Like. Lisp."))
+    (slide
+      (p (img :src "img/stewart.jpg"))
+      (p (em "Like Patrick Stewart, spreadsheets are undead.")))
 
-    (slide :title "Spreadsheet Programming"
+    (slide :title "Staying Power"
       (quicklist
        "Reactive"
        "Transparent"
@@ -65,9 +43,10 @@
 
     (slide :title "Reactive"
       (quicklist
-       (span (mono "cell") " - another \"unit of time management\"")
-       "Time doesn't exist in spreadsheets."
-       (span "Similar to " (mono "atom") ", " (mono "ref") ", " (mono "var") ", " (mono "agent"))))
+       (span (code "cell") " - another \"unit of time management\"")
+       (span "Similar to " (code "atom") ", " (code "ref") ", " (code "var") ", " (code "agent")))
+      (hr)
+      (em "Time doesn't exist in spreadsheets."))
 
     (slide :title "Transparent"
       (img :src "img/Spreadsheet_animation.gif")
@@ -90,26 +69,96 @@
       (quicklist
        "Clerks enter data"
        "Domain experts write formulas"
-       "Others make visualizations, reports, applications"))
+       "Others make visualizations, reports, applications")))
 
-    (slide :title "Spreadsheets are Awesome"
-      (quicklist
-       "Highly accessible principles, metaphors"
-       "Powerful, practical environment"
-       "Layers efficiently divide labor")))
+  (chapter :title "Javelin"
 
-  (chapter :title "Hoplon" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (slide :title "Javelin"
+      (p (img :src "img/javelin.png"))
+      (p "Spreadsheet-like dataflow programming in ClojureScript."))
 
-    (slide :title "Hoplon = Spreadsheet + Lisp"
-      (quicklist
-       "Layered approach to web applications"
-       "Supports the layered approach"
-       "Built with Clojure, ClojureScript"))
+    (slide :title "Input Cells")
 
-    (slide :title "Hoplon"
-      (quicklist
-       "HTML5, SVG, D3 et al are the new \"charts\""
-       "UI/UX designers are the new chart makers"
-       "Domain models should empower, support them"))
-    
-    ))
+    (slide :title (code "cell")
+      (highlight
+       ;;{{
+       (def n (cell 0))
+       @n ;=> 0
+
+       (swap! n inc)
+       @n ;=> 1
+       ;;}}
+       ))
+
+    (slide :title (code "defc")
+      (highlight
+       ;;{{
+       (defc n 0)
+       @n ;=> 0
+
+       (swap! n inc)
+       @n ;=> 1
+       ;;}}
+       ))
+
+    (slide :title "Input Cell in Action"
+      (highlight
+       ;;{{
+       (let [cnt (cell 0)]
+         (div
+           (p (text "cnt = ~{cnt}"))
+           (button :on-click #(swap! cnt inc) "Increment!")))
+       ;;}}
+       )
+      (let [cnt (cell 0)]
+        (div
+          (p (text "cnt = ~{cnt}"))
+          (button :on-click #(swap! cnt inc) "Increment!"))))
+
+    (slide :title "Formula Cells")
+
+    (slide :title (code "cell=")
+      (highlight
+       ;;{{
+       (defc n 0)
+       (def  n*5 (cell= (* n 5)))
+       @n   ;=> 0
+       @n*5 ;=> 0
+
+       (swap! n inc)
+       @n   ;=> 1
+       @n*5 ;=> 5
+       ;;}}
+       ))
+
+    (slide :title (code "defc=")
+      (highlight
+       ;;{{
+       (defc  n 0)
+       (defc= n*5 (* n 5))
+       @n   ;=> 0
+       @n*5 ;=> 0
+
+       (swap! n inc)
+       @n   ;=> 1
+       @n*5 ;=> 5
+       ;;}}
+       ))
+
+    (slide :title "Formula Cell in Action"
+      (highlight
+       ;;{{
+       (let [cnt   (cell 0)
+             cnt*5 (cell= (* cnt 5))]
+         (div
+           (p (text "cnt = ~{cnt}, cnt*5 = ~{cnt*5}"))
+           (button :class :on-click #(swap! cnt inc) "Increment!")
+           (button :on-click #(swap! cnt dec) "Decrement!")))
+       ;;}}
+       )
+      (let [cnt   (cell 0)
+            cnt*5 (cell= (* cnt 5))]
+        (div
+          (p (text "cnt = ~{cnt}, cnt*5 = ~{cnt*5}"))
+          (button :on-click #(swap! cnt inc) "Increment!")
+          (button :on-click #(swap! cnt dec) "Decrement!"))))))
