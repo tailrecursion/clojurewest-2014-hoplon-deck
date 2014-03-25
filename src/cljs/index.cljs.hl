@@ -313,8 +313,8 @@
     
     (slide
       (quicklist
-        "Ring RPC middleware"
-        "Performant EDN transported over HTTP"
+        "Ring RPC middleware + CLJS client library"
+        "Performant EDN transport over HTTP"
         "A great match with CQRS and Datomic"))
     
     )
