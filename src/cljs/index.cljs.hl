@@ -168,11 +168,37 @@
 
   (chapter :title "HLisp" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
+    (slide :title "The Hoplon Compiler"
+      (quicklist
+        (span "Hoplon compiles " (code "*.hl") " source files")
+        (span "Emits HTML files and " (code "main.js"))
+        "ClojureScript builds DOM at runtime"
+        "Frontend completely static HTML and JS"))
+    
+    (slide :title "Example Page"
+      (highlight
+        ;;{{
+        (page "index.html")
+        
+        (html
+          (head
+            (title "hello | home"))
+          (body
+            (h1 "Hello, world!")))
+        ;;}}
+        ))
+    
     (slide :title "HTML is Already a Program"
       (quicklist
-        "Browser parses HTML, builds tree, creates DOM"
+        "Browser parses HTML markup"
+        "Builds tree"
+        "Creates DOM elements"))
+    
+    (slide :title "However..."
+      (quicklist
         "No means of abstraction"
-        "No access to JavaScript environment"))
+        "No access to JavaScript environment"
+        "No scopes"))
     
     (slide :title "But, HTML is Lispy"
       (highlight
@@ -189,9 +215,7 @@
           (h1 "Hello World")
           (p "Lisp rules!"))
         ;;}}
-        )
-      (hr)
-      (em "You can still use HTML syntax, no problem."))
+        ))
     
     (slide :title "Attributes"
       (highlight
@@ -215,27 +239,42 @@
         )
       (hr)
       (em "Manipulate DOM elements directly."))
+    
+    (slide :title (h3 "Elements Implement " (code "IFn"))
+      (highlight :class "language-clojure"
+        ;;{{
+        (def elem (div :id "div1"))
+        
+        (div1 :class "fancy"
+          (p "I'm in a paragraph!"))
+        
+        ; <div id="div1" class="fancy">
+        ;   <p>I'm in a paragraph!</p>
+        ; </div>
+        ;;}}
+        )
+      )
 
     (slide :title "Functions, not Templates"
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
-        (defn foo []
+        (defn foo [& children]
           (div
-            (h1 "Hello World")))
+            (h1 "Hello World")
+            children))
         
         ...
         
-        (html
-          (head)
-          (body
-            (foo)))
+        (div
+          (foo
+            (p "Clojure is fun!")))
         ;;}}
         )
       (hr)
       (em "Take advantage of the affordances of Lisp in a unified environment."))
 
     (slide :title (code "defelem")
-      (highlight
+      (highlight :class "language-clojure"
         ;;{{
         (defelem quicklist [attr-map items]
           (ul attr-map
@@ -243,22 +282,37 @@
         
         ...
         
-        (html
-          (head)
-          (body
-            (quicklist :class "fancy"
-              "item 1"
-              "item 2")))
+        (div
+          (quicklist :class "fancy"
+            (span "item 1")
+            (span "item 2")))
         ;;}}
         )
       (hr)
       (em "Collects attribute and child arguments, implementing the HTML semantic."))
     
+    (slide :title "Page Declaration"
+      (quicklist
+        "Similar to CLJS namespace declaration"
+        "Location of emitted HTML file relative to docroot"
+        "HLisp elements etc. referred into namespace"))
+    
+    (slide
+      (highlight :class "language-clojure"
+        ;;{{
+        (page "products/catalog.html"
+          (:refer-hoplon :exclude [div span])
+          (:require [megacorp.components :refer [div span]]))
+        
+        ...
+        ;;}}
+        ))
+
     (slide :title "DOM = I/O"
       (quicklist
         "Events are input"
         "Elements and their properties provide output"
-        "One-way dataflow: input and output are completely orthogonal"))
+        "One-way dataflow: input and output never mix"))
     
     (slide
       (quicklist
@@ -315,7 +369,54 @@
       (quicklist
         "Ring RPC middleware + CLJS client library"
         "Performant EDN transport over HTTP"
-        "A great match with CQRS and Datomic"))
+        "Affordances for CQRS state machine pattern"
+        "A great match with Datomic"))
     
-    )
+    (slide
+      (img :src "img/castra-cqrs.png"))
+    
+    (slide :title "API Endpoints"
+      (quicklist
+        "regular functions with annotations"
+        "similar to Clojure pre and postconditions"
+        "pre and post only applied at RPC endpoint"
+        "facilitates composition without mocking state"
+        "exceptions can be caught in the client"))
+
+    (slide :title "Pre and Postconditions"
+      (highlight
+        ;;{{
+        (castra/defn buy-item! [id sku qty]
+          {:rpc/pre [(rules/logged-in-as? id)]
+           :rpc/query [(next-state nil)]}
+          ...)
+        ;;}}
+        ))
+
+    (slide
+      (highlight
+        ;;{{
+        (ns my-application.api
+          (:require
+           [tailrecursion.castra      :as castra]
+           [my-application.http-rules :as rules]
+           [my-application.core       :as core]))
+        
+        (castra/defn query [id]
+          {:rpc/pre [(or (nil? id) (rules/self? id))]}
+          (when-let [id (or id (rules/get-self))]
+            {:user-id     id
+             :cc-on-file? (core/cc-on-file? id)
+             :cart        (core/get-cart id)}))
+        
+        (castra/defn login! [email password]
+          {:rpc/pre [(rules/allow)]
+           :rpc/query [(query nil)]}
+          (if-let [self (core/get-login email password)]
+            (rules/set-self! (:id self))
+            (throw (Exception. "Username or password incorrect."))))
+        ;;}}
+        )))
+  
+  (chapter :title "Architecture")
   )
