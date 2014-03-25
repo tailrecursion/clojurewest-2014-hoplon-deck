@@ -70,7 +70,8 @@
     (slide
       (img :src "img/excel_wizard_one.gif")
       (hr)
-      (p "Charts can be added and customized without modifying the underlying data or formulas."))
+      (p "Charts and forms can be added and customized without modifying the 
+          underlying data or formulas."))
 
     (slide :title "Spreadsheets Divide Labor"
       (quicklist
@@ -78,7 +79,7 @@
        "Domain experts write formulas"
        "Others make visualizations, reports, applications")))
 
-  (chapter :title "Javelin"
+  (chapter :title "Javelin" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     (slide :title "Javelin"
       (p (img :src "img/javelin.png"))
@@ -147,4 +148,158 @@
        (span "Naming/scopes follow ClojureScript"
          (quicklist
           (code "def")
-          (code "let")))))))
+          (code "let"))))))
+
+  (chapter :title "HLisp" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    
+    (slide :title "HTML is Already a Program"
+      (quicklist
+        "Browser parses HTML, builds tree, creates DOM"
+        "No means of abstraction"
+        "No access to JavaScript environment"))
+    
+    (slide :title "But, HTML is Lispy"
+      (highlight
+          ;;{{
+          <div>
+            <h1>Hello World</h1>
+            <p>Lisp rules!</p>
+          </div>
+          ;;}}
+          )
+      (highlight
+        ;;{{
+        (div
+          (h1 "Hello World")
+          (p "Lisp rules!"))
+        ;;}}
+        )
+      (hr)
+      (em "You can still use HTML syntax, no problem."))
+    
+    (slide :title "Attributes"
+      (highlight
+        ;;{{
+        (div :id "main" :class "fancy"
+          (h1 "Hello World"))
+        
+        (div {:id "main" :class "fancy"}
+          (h1 "Hello World"))
+         ;;}}
+         )
+      (hr)
+      (em "Attribute values don't have to be strings."))
+    
+    (slide :title "No Boxing or Indirection"
+      (highlight :class "language-clojure"
+        ;;{{
+        (type (div))
+        ;=> function HTMLDivElement() { [native code] }
+        ;;}}
+        )
+      (hr)
+      (em "Manipulate DOM elements directly."))
+
+    (slide :title "Functions, not Templates"
+      (highlight
+        ;;{{
+        (defn foo []
+          (div
+            (h1 "Hello World")))
+        
+        ...
+        
+        (html
+          (head)
+          (body
+            (foo)))
+        ;;}}
+        )
+      (hr)
+      (em "Take advantage of the affordances of Lisp in a unified environment."))
+
+    (slide :title (code "defelem")
+      (highlight
+        ;;{{
+        (defelem quicklist [attr-map items]
+          (ul attr-map
+            (map li items)))
+        
+        ...
+        
+        (html
+          (head)
+          (body
+            (quicklist :class "fancy"
+              "item 1"
+              "item 2")))
+        ;;}}
+        )
+      (hr)
+      (em "Collects attribute and child arguments, implementing the HTML semantic."))
+    
+    (slide :title "DOM = I/O"
+      (quicklist
+        "Events are input"
+        "Elements and their properties provide output"
+        "One-way dataflow: input and output are completely orthogonal"))
+    
+    (slide
+      (quicklist
+        "Callbacks trigger updates to input cells"
+        "Cells trigger updates to DOM element properties"))
+
+    (slide
+      (highlight
+        ;;{{
+        (defc clicks 0)
+
+        (button
+          :style (cell= (str "color:" (if (even? clicks) "red" "blue")))
+          :click #(swap! clicks inc)
+          :text (cell= (str "I've been clicked " clicks " times!")))
+        ;;}}
+        )
+      (p (br))
+      (let [clicks (cell 0)]
+        (button
+          :style (cell= (str "font-size:larger;color:" (if (even? clicks) "red" "blue")))
+          :click #(swap! clicks inc)
+          :text (cell= (str "I've been clicked " clicks " times!"))))
+      (p (br))
+      (hr)
+      (em "Attributes dispatch on type of value."))
+    
+    (slide
+      (highlight
+        ;;{{
+        (defmethod do! :slide
+          [element _ value]
+          (case value
+            :up (.slideUp (js/jQuery element))
+            :down (.slideDown (js/jQuery element))))
+        
+        (defmethod on! :swipe-left
+          [element _ callback]
+          (.on (js/jQuery element) "swipeleft" callback))
+        
+        (defc swipes 0)
+
+        (div :swipe-left #(swap! swipes inc)
+          (p :slide (cell= (if (even? swipes) :down :up)))
+          (p "Swipe here!"))
+        ;;}}
+        )
+      (hr)
+      (em "Attributes can be extended.")))
+  
+  (chapter :title "Castra" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    
+    (slide
+      (quicklist
+        "Ring RPC middleware + CLJS client library"
+        "Performant EDN transport over HTTP"
+        "A great match with CQRS and Datomic"))
+    
+    )
+  )
