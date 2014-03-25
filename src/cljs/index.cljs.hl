@@ -440,5 +440,5 @@
   
   (chapter :title "Architecture" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
-    )
-  )
+    (slide
+      (img :src "img/arch-hlisp.png"))))
